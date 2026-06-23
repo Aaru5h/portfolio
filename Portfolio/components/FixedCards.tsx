@@ -1,10 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function FixedCards() {
   const containerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -16,6 +26,16 @@ export default function FixedCards() {
       const trigger = document.getElementById("cards-trigger");
 
       if (!container || !grid || !trigger) {
+        requestAnimationFrame(tickCards);
+        return;
+      }
+
+      // If mobile, keep things clean, relative, and fully visible
+      if (window.innerWidth < 768) {
+        container.style.opacity = "1";
+        container.style.pointerEvents = "auto";
+        grid.style.maskImage = "none";
+        grid.style.webkitMaskImage = "none";
         requestAnimationFrame(tickCards);
         return;
       }
@@ -41,15 +61,9 @@ export default function FixedCards() {
       container.style.opacity = String(containerOpacity);
       container.style.pointerEvents = containerOpacity > 0.1 ? "auto" : "none";
 
-      const isMobile = window.innerWidth < 768;
       const revealPct = progress * 130;
-      if (isMobile) {
-        grid.style.maskImage = `linear-gradient(to bottom, black ${revealPct}%, transparent ${revealPct + 20}%)`;
-        grid.style.webkitMaskImage = `linear-gradient(to bottom, black ${revealPct}%, transparent ${revealPct + 20}%)`;
-      } else {
-        grid.style.maskImage = `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
-        grid.style.webkitMaskImage = `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
-      }
+      grid.style.maskImage = `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
+      grid.style.webkitMaskImage = `linear-gradient(to right, black ${revealPct}%, transparent ${revealPct + 15}%)`;
 
       requestAnimationFrame(tickCards);
     }
@@ -66,15 +80,15 @@ export default function FixedCards() {
       ref={containerRef}
       id="fixed-cards"
       style={{
-        position: "fixed",
+        position: isMobile ? "relative" : "fixed",
         bottom: 0,
         left: 0,
         right: 0,
         zIndex: 4,
-        padding: "2rem 2.5rem",
-        opacity: 0,
-        pointerEvents: "none",
-        transition: "opacity 0.1s ease-out",
+        padding: isMobile ? "4rem 1.5rem" : "2rem 2.5rem",
+        opacity: isMobile ? 1 : 0,
+        pointerEvents: isMobile ? "auto" : "none",
+        transition: isMobile ? "none" : "opacity 0.1s ease-out",
       }}
     >
       <div

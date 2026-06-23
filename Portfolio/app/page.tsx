@@ -17,16 +17,16 @@ export default function Home() {
       <Hero />
 
       {/* Spacer */}
-      <div style={{ height: "150vh" }} />
+      <div className="h-0 md:h-[150vh]" />
 
       {/* Cards Trigger Zone */}
-      <div id="cards-trigger" style={{ height: "200vh" }} />
+      <div id="cards-trigger" className="h-0 md:h-[200vh]" />
 
       {/* Fixed Cards Component */}
       <FixedCards />
 
       {/* Spacer */}
-      <div style={{ height: "100vh" }} />
+      <div className="h-0 md:h-[100vh]" />
 
       {/* Section 3 */}
       <SectionThree />
