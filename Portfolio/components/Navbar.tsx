@@ -42,7 +42,7 @@ export default function Navbar() {
         {/* Desktop Socials */}
         <div className="hidden md:flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/Aaru5h"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition-colors duration-200"
@@ -52,7 +52,7 @@ export default function Navbar() {
             </svg>
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/aarush-gupta-2946783a6/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition-colors duration-200"
@@ -62,7 +62,7 @@ export default function Navbar() {
             </svg>
           </a>
           <a
-            href="https://twitter.com"
+            href="https://x.com/AarushG61471880"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-white transition-colors duration-200"
@@ -115,7 +115,7 @@ export default function Navbar() {
           </ul>
           <div className="flex items-center gap-4 mt-2 pt-4 border-t border-white/10">
             <a
-              href="https://github.com"
+              href="https://github.com/Aaru5h"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-white"
@@ -125,7 +125,7 @@ export default function Navbar() {
               </svg>
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/aarush-gupta-2946783a6/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-white"
@@ -135,7 +135,7 @@ export default function Navbar() {
               </svg>
             </a>
             <a
-              href="https://twitter.com"
+              href="https://x.com/AarushG61471880"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-white"

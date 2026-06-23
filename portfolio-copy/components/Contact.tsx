@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 
 const socials = [
-  { label: "GitHub", href: "https://github.com", handle: "@aarushgupta" },
-  { label: "LinkedIn", href: "https://linkedin.com", handle: "in/aarushgupta" },
-  { label: "X / Twitter", href: "https://x.com", handle: "@aarushgupta" },
-  { label: "Email", href: "mailto:hello@aarush.dev", handle: "hello@aarush.dev" },
+  { label: "GitHub", href: "https://github.com/Aaru5h", handle: "@Aaru5h" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/aarush-gupta-2946783a6/", handle: "in/aarush-gupta-2946783a6" },
+  { label: "X / Twitter", href: "https://x.com/AarushG61471880", handle: "@AarushG61471880" },
+  { label: "Email", href: "mailto:aarushgupta707.2@gmail.com", handle: "aarushgupta707.2@gmail.com" },
 ];
 
 export default function Contact() {
@@ -30,7 +30,7 @@ export default function Contact() {
       >
         <div className="text-center">
           <a
-            href="mailto:hello@aarush.dev"
+            href="mailto:aarushgupta707.2@gmail.com"
             className="inline-block rounded-xl bg-gradient-to-r from-accent to-accent-2 px-8 py-4 font-semibold text-white shadow-[0_8px_30px_-8px_rgba(124,108,246,0.6)] transition-transform hover:scale-[1.03]"
           >
             Say Hello 👋
