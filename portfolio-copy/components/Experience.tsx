@@ -5,34 +5,41 @@ import SectionHeading from "./SectionHeading";
 
 const items = [
   {
-    type: "Work",
-    role: "Full Stack Engineer",
-    org: "Tech Startup",
-    period: "2024 — Present",
+    type: "Journey",
+    role: "AI Engineering",
+    org: "RAG & LLM Applications",
+    period: "2026 — Present",
     points: [
-      "Building LLM-powered features end to end — from prompt pipelines to production UIs.",
-      "Cut API latency 40% by redesigning the caching and retrieval layer.",
+      "Building RAG pipelines and LLM-powered applications.",
+      "Bringing AI features into full-stack products end to end.",
     ],
   },
   {
-    type: "Work",
-    role: "ML Engineering Intern",
-    org: "AI Research Lab",
-    period: "2023 — 2024",
+    type: "Journey",
+    role: "Machine Learning & DevOps",
+    org: "Self-driven Learning",
+    period: "Late 2025 — 2026",
     points: [
-      "Trained and evaluated transformer models for document understanding tasks.",
-      "Shipped a model-serving pipeline handling 1M+ daily inferences.",
+      "Started the ML journey — fundamentals, models, and evaluation.",
+      "Picked up DevOps along the way: CI/CD, containers, and deployment.",
+    ],
+  },
+  {
+    type: "Journey",
+    role: "Full Stack Development",
+    org: "Web Development",
+    period: "2024 — Present",
+    points: [
+      "Began building full-stack apps alongside the first year of college.",
+      "Shipped projects across the stack — from UIs to APIs and databases.",
     ],
   },
   {
     type: "Education",
     role: "B.Tech in Computer Science",
     org: "University",
-    period: "2021 — 2025",
-    points: [
-      "Specialization in Artificial Intelligence & Machine Learning.",
-      "Led the developer society; organized hackathons with 500+ participants.",
-    ],
+    period: "2024 — 2028",
+    points: ["Currently in 3rd year."],
   },
 ];
 
