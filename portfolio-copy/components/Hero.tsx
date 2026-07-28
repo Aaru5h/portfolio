@@ -1,120 +1,133 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: 0.15 * i, duration: 0.7, ease: "easeOut" as const },
-  }),
-};
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+/** A headline line that slides up from behind a mask. */
+function Line({ delay, children }: { delay: number; children: React.ReactNode }) {
+  return (
+    <span className="block overflow-hidden pb-[0.08em]">
+      <motion.span
+        initial={{ y: "115%" }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1.1, ease: EASE, delay }}
+        className="block"
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
+
+const stats = [
+  ["3+", "Years building"],
+  ["20+", "Projects shipped"],
+  ["10+", "Models deployed"],
+];
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
-      {/* Background layers */}
-      <div className="grid-bg absolute inset-0" />
-      <div className="absolute -top-40 left-1/2 h-[32rem] w-[56rem] -translate-x-1/2 rounded-full bg-accent/20 blur-[140px]" />
-      <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-accent-2/10 blur-[120px]" />
-      <div className="absolute top-1/2 -right-40 h-96 w-96 rounded-full bg-accent-3/10 blur-[120px]" />
-
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+    <section
+      ref={ref}
+      className="relative flex min-h-[100svh] flex-col justify-end px-6 pt-32 pb-10 lg:px-10"
+    >
+      <motion.div style={{ y, opacity }} className="mx-auto w-full max-w-7xl">
         <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/70"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="label flex items-center gap-3"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-          </span>
-          Available for new opportunities
+          <span className="bg-accent/60 h-px w-8" />
+          Full-Stack · AI / ML Engineer
         </motion.div>
 
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={1}
-          className="font-display text-5xl font-bold tracking-tight text-white sm:text-7xl"
-        >
-          Hi, I&apos;m <span className="text-gradient">Aarush Gupta</span>
-        </motion.h1>
+        <h1 className="mt-8 text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.92] font-medium tracking-[-0.03em]">
+          <Line delay={0.15}>Building software</Line>
+          <Line delay={0.27}>
+            that{" "}
+            <span className="font-serif text-accent italic font-normal">thinks</span>
+            <span className="text-accent">.</span>
+          </Line>
+        </h1>
 
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={2}
-          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/60 sm:text-xl"
-        >
-          Full Stack Engineer with a passion for{" "}
-          <span className="text-white">AI &amp; Machine Learning</span> — I build
-          intelligent, end-to-end products that ship from idea to production.
-        </motion.p>
+        <div className="mt-12 flex flex-col gap-10 border-t border-white/10 pt-8 lg:flex-row lg:items-start lg:justify-between">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.6 }}
+            className="text-muted max-w-md text-base leading-relaxed"
+          >
+            I&apos;m <span className="text-ink">Aarush</span> — I design and ship
+            end-to-end products where solid engineering meets machine intelligence.
+            Frontends, APIs, and model pipelines that actually make it to production.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.72 }}
+            className="flex flex-wrap items-center gap-3"
+          >
+            <a
+              href="#projects"
+              className="bg-accent group flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-[#070708] transition-transform duration-300 hover:scale-[1.03]"
+            >
+              Selected work
+              <span className="transition-transform duration-300 group-hover:translate-y-0.5">
+                ↓
+              </span>
+            </a>
+            <a
+              href="#contact"
+              className="rounded-full border border-white/15 px-6 py-3 text-sm font-medium transition-colors duration-300 hover:border-white/40 hover:bg-white/5"
+            >
+              Get in touch
+            </a>
+          </motion.div>
+        </div>
 
         <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={3}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.9 }}
+          className="mt-16 grid grid-cols-3 gap-px overflow-hidden border-y border-white/10 bg-white/10"
         >
-          <a
-            href="#projects"
-            className="rounded-xl bg-gradient-to-r from-accent to-accent-2 px-7 py-3.5 font-semibold text-white shadow-[0_8px_30px_-8px_rgba(124,108,246,0.6)] transition-transform hover:scale-[1.03]"
-          >
-            View My Work
-          </a>
-          <a
-            href="#contact"
-            className="glass rounded-xl px-7 py-3.5 font-semibold text-white/80 transition-colors hover:text-white"
-          >
-            Get In Touch
-          </a>
-        </motion.div>
-
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={4}
-          className="mt-16 flex items-center justify-center gap-8 text-sm text-white/40"
-        >
-          {[
-            ["3+", "Years Building"],
-            ["20+", "Projects Shipped"],
-            ["10+", "ML Models Deployed"],
-          ].map(([stat, label]) => (
-            <div key={label} className="text-center">
-              <div className="font-display text-2xl font-bold text-white">{stat}</div>
-              <div className="mt-1">{label}</div>
+          {stats.map(([value, label]) => (
+            <div key={label} className="bg-[#070708] px-1 py-5 sm:px-4">
+              <div className="text-2xl font-medium tracking-tight sm:text-3xl">
+                {value}
+              </div>
+              <div className="label mt-1.5">{label}</div>
             </div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
 
-      {/* Scroll cue */}
-      <motion.a
-        href="#about"
-        aria-label="Scroll down"
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 1.4 }}
+        className="label mx-auto mt-10 flex w-full max-w-7xl items-center gap-2"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8 }}
-          className="flex h-10 w-6 items-start justify-center rounded-full border border-white/20 p-1.5"
+        <motion.span
+          animate={{ y: [0, 5, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
         >
-          <div className="h-2 w-1 rounded-full bg-white/50" />
-        </motion.div>
-      </motion.a>
+          ↓
+        </motion.span>
+        Scroll
+      </motion.div>
     </section>
   );
 }

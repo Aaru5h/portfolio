@@ -1,64 +1,82 @@
 "use client";
 
 import { motion } from "framer-motion";
-import SectionHeading from "./SectionHeading";
+
+const EMAIL = "aarushgupta707.2@gmail.com";
 
 const socials = [
   { label: "GitHub", href: "https://github.com/Aaru5h", handle: "@Aaru5h" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/aarush-gupta-2946783a6/", handle: "in/aarush-gupta-2946783a6" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/aarush-gupta-2946783a6/",
+    handle: "in/aarush-gupta",
+  },
   { label: "X / Twitter", href: "https://x.com/AarushG61471880", handle: "@AarushG61471880" },
-  { label: "Email", href: "mailto:aarushgupta707.2@gmail.com", handle: "aarushgupta707.2@gmail.com" },
+  { label: "Email", href: `mailto:${EMAIL}`, handle: EMAIL },
 ];
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative scroll-mt-24 px-6 py-28">
-      <div className="absolute bottom-0 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-accent/15 blur-[160px]" />
+    <section id="contact" className="relative scroll-mt-24 px-6 py-28 lg:px-10 lg:py-40">
+      <div className="mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-90px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="flex items-baseline gap-4 border-t border-white/10 pt-5">
+            <span className="label text-accent">05</span>
+            <span className="label">Contact</span>
+          </div>
 
-      <SectionHeading
-        eyebrow="Contact"
-        title="Let's build something together"
-        subtitle="Have a project in mind, a role to fill, or just want to chat about AI? My inbox is open."
-      />
+          <h2 className="mt-8 max-w-4xl text-[clamp(2.25rem,6.5vw,5rem)] leading-[1.02] font-medium tracking-[-0.03em]">
+            Let&apos;s build something{" "}
+            <span className="font-serif text-accent italic font-normal">together</span>.
+          </h2>
 
-      <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="glass relative mx-auto max-w-3xl rounded-3xl p-8 sm:p-12"
-      >
-        <div className="text-center">
-          <a
-            href="mailto:aarushgupta707.2@gmail.com"
-            className="inline-block rounded-xl bg-gradient-to-r from-accent to-accent-2 px-8 py-4 font-semibold text-white shadow-[0_8px_30px_-8px_rgba(124,108,246,0.6)] transition-transform hover:scale-[1.03]"
-          >
-            Say Hello 👋
-          </a>
-          <p className="mt-4 text-sm text-white/45">
-            Usually responds within 24 hours
+          <p className="text-muted mt-6 max-w-md leading-relaxed">
+            Have a project in mind, a role to fill, or just want to argue about model
+            evals? My inbox is open — usually a reply within 24 hours.
           </p>
-        </div>
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-2">
-          {socials.map((social) => (
-            <a
+          <a
+            href={`mailto:${EMAIL}`}
+            className="group mt-12 inline-flex items-center gap-4 text-2xl font-medium tracking-tight sm:text-4xl"
+          >
+            <span className="wipe pb-1">{EMAIL}</span>
+            <span className="text-accent inline-block transition-transform duration-500 group-hover:translate-x-2">
+              ↗
+            </span>
+          </a>
+        </motion.div>
+
+        <div className="mt-20 grid gap-px border-y border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+          {socials.map((social, i) => (
+            <motion.a
               key={social.label}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 transition-colors hover:border-accent/40 hover:bg-white/[0.06]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              className="group bg-[#070708] p-6 transition-colors duration-500 hover:bg-white/[0.04]"
             >
-              <span className="font-medium text-white/80 group-hover:text-white">
-                {social.label}
-              </span>
-              <span className="text-sm text-white/40 group-hover:text-accent-2">
+              <div className="flex items-center justify-between">
+                <span className="label">{social.label}</span>
+                <span className="text-accent translate-y-1 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  ↗
+                </span>
+              </div>
+              <div className="text-muted group-hover:text-ink mt-4 truncate font-mono text-sm transition-colors">
                 {social.handle}
-              </span>
-            </a>
+              </div>
+            </motion.a>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

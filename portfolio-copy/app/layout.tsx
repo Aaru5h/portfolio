@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,9 +7,16 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-mono-jb",
+});
+
+const instrument = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["italic", "normal"],
+  variable: "--font-serif-display",
 });
 
 export const metadata: Metadata = {
@@ -24,10 +31,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
-        {children}
-      </body>
+    // Font vars must live on <html>: @theme resolves var(--font-inter) at :root,
+    // and a var() that is undefined there makes the whole token invalid.
+    <html
+      lang="en"
+      className={`dark ${inter.variable} ${jetbrains.variable} ${instrument.variable}`}
+    >
+      <body className="grain antialiased">{children}</body>
     </html>
   );
 }

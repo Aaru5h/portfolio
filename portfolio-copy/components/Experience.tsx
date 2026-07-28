@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 
 const items = [
@@ -44,59 +45,63 @@ const items = [
 ];
 
 export default function Experience() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.75", "end 0.6"],
+  });
+  const scaleY = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.4 });
+
   return (
-    <section id="experience" className="relative scroll-mt-24 px-6 py-28">
-      <SectionHeading
-        eyebrow="Experience"
-        title="Where I've been"
-        subtitle="My journey through work and education so far."
-      />
+    <section
+      id="experience"
+      className="relative scroll-mt-24 px-6 py-28 lg:px-10 lg:py-40"
+    >
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          index="04"
+          eyebrow="Path"
+          title="How I got here."
+          subtitle="A short timeline of the work and the learning behind it."
+        />
 
-      <div className="relative mx-auto max-w-3xl">
-        {/* Vertical line */}
-        <div className="absolute top-0 bottom-0 left-4 w-px bg-gradient-to-b from-accent via-accent-2 to-transparent sm:left-1/2" />
+        <div ref={ref} className="relative pl-8 sm:pl-12">
+          {/* rail */}
+          <div className="absolute top-2 bottom-2 left-0 w-px bg-white/10" />
+          <motion.div
+            style={{ scaleY }}
+            className="bg-accent absolute top-2 bottom-2 left-0 w-px origin-top"
+          />
 
-        <div className="space-y-12">
-          {items.map((item, i) => (
-            <motion.div
-              key={item.role}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
-              className={`relative flex flex-col pl-12 sm:w-1/2 sm:pl-0 ${
-                i % 2 === 0
-                  ? "sm:mr-auto sm:pr-12 sm:text-right"
-                  : "sm:ml-auto sm:pl-12"
-              }`}
-            >
-              {/* Dot */}
-              <div
-                className={`absolute top-1 left-4 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-accent bg-background sm:left-auto ${
-                  i % 2 === 0
-                    ? "sm:right-0 sm:translate-x-1/2"
-                    : "sm:left-0 sm:-translate-x-1/2"
-                }`}
-              />
-
-              <span className="text-xs font-semibold tracking-widest text-accent-2 uppercase">
-                {item.type} · {item.period}
-              </span>
-              <h3 className="font-display mt-1.5 text-lg font-bold text-white">
-                {item.role}
-              </h3>
-              <div className="text-sm text-white/50">{item.org}</div>
-              <ul
-                className={`mt-3 space-y-1.5 text-sm text-white/55 ${
-                  i % 2 === 0 ? "sm:ml-auto" : ""
-                }`}
+          <div className="space-y-14">
+            {items.map((item, i) => (
+              <motion.div
+                key={item.role}
+                initial={{ opacity: 0, x: 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-90px" }}
+                transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative"
               >
-                {item.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+                <span className="bg-accent absolute top-2 -left-8 h-1.5 w-1.5 -translate-x-1/2 rounded-full transition-transform duration-500 group-hover:scale-[2] sm:-left-12" />
+
+                <div className="flex flex-wrap items-baseline gap-x-4">
+                  <span className="label text-accent">{item.period}</span>
+                  <span className="label">{item.type}</span>
+                </div>
+                <h3 className="mt-3 text-2xl font-medium tracking-tight">{item.role}</h3>
+                <div className="text-muted mt-1 font-mono text-sm">{item.org}</div>
+                <ul className="text-muted mt-4 max-w-lg space-y-2 text-sm leading-relaxed">
+                  {item.points.map((point) => (
+                    <li key={point} className="flex gap-3">
+                      <span className="text-accent/50">—</span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

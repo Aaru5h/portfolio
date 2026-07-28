@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #060609;
-  --color-surface: #0d0d14;
-  --color-card: #11111a;
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-accent: #7c6cf6;
-  --color-accent-2: #22d3ee;
-  --color-accent-3: #f472b6;
+  --color-bg: #070708;
+  --color-panel: #0c0c0e;
+  --color-ink: #ecece9;
+  --color-muted: #8b8b85;
+  --color-line: rgba(255, 255, 255, 0.09);
+  --color-accent: #c9f24d;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --animate-marquee: marquee 30s linear infinite;
+  --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, monospace;
+  --font-serif: var(--font-serif-display), ui-serif, Georgia, serif;
+
+  --animate-marquee: marquee 40s linear infinite;
 
   @keyframes marquee {
     from {
@@ -27,61 +29,71 @@ html {
 }
 
 body {
-  background-color: var(--color-background);
-  color: #e5e7eb;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(124, 108, 246, 0.4);
+  background: var(--color-accent);
+  color: #070708;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #060609;
+  background: var(--color-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #26263a;
-  border-radius: 8px;
+  background: #23231f;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #34344e;
+  background: #3a3a33;
 }
 
-.text-gradient {
-  background: linear-gradient(120deg, #a78bfa 0%, #22d3ee 50%, #f472b6 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Film grain — one fixed overlay for the whole page */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Mono metadata label */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }
 
-.glow-card {
-  position: relative;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+/* Underline that wipes in on hover */
+.wipe {
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wipe:hover {
+  background-size: 100% 1px;
 }
 
-.glow-card:hover {
-  border-color: rgba(124, 108, 246, 0.45);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px -20px rgba(124, 108, 246, 0.35);
-}
-
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
