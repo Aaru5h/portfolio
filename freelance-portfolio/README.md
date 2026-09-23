@@ -34,6 +34,12 @@ Browser verification expects the dev server on port 3002 and Playwright Chromium
 
 Deploy this `freelance-portfolio` directory as the application root to a Next.js-compatible host. No environment variables or external APIs are required. Configure a production domain before adding canonical metadata.
 
+For payment-provider verification, set `NEXT_PUBLIC_SITE_URL` to the final
+HTTPS origin and set `NEXT_PUBLIC_BUSINESS_REGISTRATION_NAME` to the exact
+name used in KYC. The visible `/business-details` page and footer both display
+that name. The default is `Aarush Gupta`; change it if the registration record
+uses a different individual or company name.
+
 ## Payments
 
 The Payments navigation link opens the project-payment section. It currently shows “Online payments coming soon” and a working email link to request payment instructions. No payment can be collected yet.

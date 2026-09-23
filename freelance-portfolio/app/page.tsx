@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { getPaymentUrl, paymentSettings } from "@/lib/payments";
+import { business } from "@/lib/business";
 const Sculpture = dynamic(() => import("@/components/Sculpture"), {
   ssr: false,
   loading: () => (
@@ -757,7 +758,8 @@ export default function Home() {
           aarush<span className="brand-dot">.</span>
         </a>
         <span>Independent by choice. Built with care.</span>
-        <div>
+        <div className="footer-links">
+          <a href="/business-details">Business details</a>
           <a href="https://github.com/Aaru5h" target="_blank" rel="noreferrer">
             GitHub <Arrow diagonal />
           </a>
@@ -772,7 +774,10 @@ export default function Home() {
             <Arrow diagonal />
           </a>
         </div>
-        <small>© {new Date().getFullYear()} Aarush Gupta</small>
+        <small>
+          © {new Date().getFullYear()} Aarush Gupta · Business registration
+          name: {business.registrationName}
+        </small>
       </footer>
     </>
   );

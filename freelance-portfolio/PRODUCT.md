@@ -19,3 +19,10 @@ Contact details can be overridden when the user responds. No deployment domain s
 
 ## Payments
 User requested a payment option, then explicitly asked to keep it pending until they supply payment details. Provide a visible pending payment option and email fallback. Never invent a destination or imply payments are enabled. Hosted payment destination remains open.
+
+## Business Verification
+The site must support payment-provider website verification: it is functional,
+lists the offered services, exposes a business registration name, and is ready
+for HTTPS hosting. The current configurable registration-name default is
+`Aarush Gupta`; it must be changed if the user’s KYC record uses another exact
+name. The public deployment URL remains undecided.

@@ -35,6 +35,25 @@ assert.equal(
     .getAttribute("href"),
   "https://www.crackai.tech/",
 );
+assert.match(
+  await page.locator("footer").innerText(),
+  /Business registration name: Aarush Gupta/,
+);
+await page.getByRole("link", { name: "Business details" }).click();
+await page.waitForLoadState("networkidle");
+assert.equal(page.url(), "http://localhost:3002/business-details");
+const businessDetails = await page.getByRole("main").innerText();
+assert.match(businessDetails, /Business registration name\s+Aarush Gupta/);
+for (const service of [
+  "Web development",
+  "App development",
+  "AI and machine learning",
+  "AI automation and integrations",
+]) {
+  assert.match(businessDetails, new RegExp(service));
+}
+await page.goto("http://localhost:3002", { waitUntil: "networkidle" });
+await page.waitForSelector(".project");
 assert.equal(await page.locator(".project").count(), 2);
 await page.getByRole("button", { name: "AI & tools", exact: true }).click();
 assert.equal(await page.locator(".project").count(), 0);
