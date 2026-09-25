@@ -1,8 +1,89 @@
-node_modules
-.next
-out
+node_modules/
+.next/
+out/
 .env*
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
-.claude
+
+# ----------------------------------------------------------------------
+# AI Assistants, Tooling & Agent Artifacts
+# ----------------------------------------------------------------------
+
+# Anthropic / Claude
+.claude/
+CLAUDE.md
+CLAUDE_*.md
+.claude.*
+
+# Next.js & Autonomous Agents
+AGENTS.md
+AGENT.md
+.agents/
+GEMINI.md
+.gemini/
+.antigravity/
+
+# Cursor
+.cursor/
+.cursorrules
+.cursorignore
+.cursorindexing/
+.cursor-cache/
+
+# GitHub Copilot
+.copilot/
+.copilot-instructions.md
+.github/copilot-instructions.md
+
+# Windsurf & Codeium
+.windsurf/
+.windsurfrules
+.codeium/
+
+# Aider
+.aider*
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v3
+
+# Impeccable AI
+.impeccable/
+.impeccable
+
+# Continue.dev
+.continue/
+.continueignore
+
+# Cline & Roo Code
+.cline/
+.clinestats
+.roomodes
+.roo/
+
+# Additional AI Assistants & Coding Agents
+.supermaven/
+.cody/
+.trae/
+.devin/
+.goose/
+.gooseignore
+.openhands/
+.swe-agent/
+
+# AI App Builders
+.bolt/
+.lovable/
+.v0/
+
+# Local Models, Weights & Runtimes
+.ollama/
+.lmstudio/
+*.gguf
+*.safetensors
+
+# Prompt Engineering & Transcripts
+*.prompt.md
+.promptflow/
+chatgpt/
+*.chatgpt*

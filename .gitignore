@@ -1,10 +1,4 @@
-node_modules/
-.next/
-out/
-.env*
 .DS_Store
-*.tsbuildinfo
-next-env.d.ts
 
 # ----------------------------------------------------------------------
 # AI Assistants, Tooling & Agent Artifacts

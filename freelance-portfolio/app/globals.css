@@ -771,6 +771,7 @@ p {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
   gap: 100px;
+  align-items: center;
 }
 .services-intro h2 {
   font-size: 46px;
@@ -903,9 +904,10 @@ p {
 }
 .about-signature {
   position: absolute;
-  top: 35px;
+  top: 190px;
   right: 27px;
   font-size: 10px;
+  white-space: nowrap;
   transform: rotate(90deg);
   transform-origin: bottom right;
 }
@@ -2023,7 +2025,6 @@ p {
 .payment-actions {
   max-width: 430px;
   width: 100%;
-  justify-self: end;
   min-width: 0;
 }
 .payment-heading {
